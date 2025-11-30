@@ -3,16 +3,16 @@ version: '3.8'
 services:
   postgres:
     image: postgres:latest
-    container_name: lmm_postgres
+    container_name: lipamdogo_postgres
     restart: always
     environment:
       POSTGRES_USER: lmm_admin
-      POSTGRES_PASSWORD: 1234$ecureP@$$
-      POSTGRES_DB: lmm_database
+      POSTGRES_PASSWORD: 1234pass
+      POSTGRES_DB: lipamdogo_database
     ports:
       - "5432:5432"
     volumes:
-      - lmm_postgres_data:/var/lib/postgresql/data
+      - lipamdogo_postgres_data:/var/lib/postgresql/data
 #    to check it out visit  C:\ProgramData\Docker\volumes\lmm_postgres_data\_data
 volumes:
-  lmm_postgres_data:
+  lipamdogo_postgres_data:

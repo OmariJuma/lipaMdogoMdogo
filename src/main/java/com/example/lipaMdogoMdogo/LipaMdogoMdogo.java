@@ -1,4 +1,4 @@
-package com.example.lipaMdogoMdoo;
+package com.example.lipaMdogoMdogo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
