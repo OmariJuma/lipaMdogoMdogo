@@ -6,6 +6,8 @@ import com.example.lipaMdogoMdogo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,5 +28,12 @@ public class UserService {
             newUser.setUpdatedAt(LocalDateTime.now());
 
             return userRepository.save(newUser);
+        }
+
+        public List<User> getAllUsers(){
+            return userRepository.findAll();
+        }
+        public Optional<User> findById(UUID id){
+        return userRepository.findById(id);
         }
 }
