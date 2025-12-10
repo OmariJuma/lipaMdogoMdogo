@@ -16,10 +16,18 @@ public class LoanService {
         this.loanRepository = loanRepository;
     }
     public List<Loan> getUserLoans(UUID id){
-       return loanRepository.findAllById(Collections.singleton(id));
+       return loanRepository.findByBorrower_Id(id);
     }
 
     public Optional<Loan> findLoanById(UUID id){
         return loanRepository.findById(id);
+    }
+
+    public Loan createLoan(Loan loan){
+        return loanRepository.save(loan);
+    }
+
+    public Boolean isUserLoan(UUID borrowerId, UUID loanId){
+        return loanRepository.existsByBorrower_IdAndId(borrowerId, loanId);
     }
 }
