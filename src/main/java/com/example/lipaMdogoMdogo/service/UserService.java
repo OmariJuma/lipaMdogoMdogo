@@ -36,4 +36,7 @@ public class UserService {
         public Optional<User> findById(UUID id){
         return userRepository.findById(id);
         }
+        public Boolean existsById(UUID id){
+        return userRepository.existsById(id);
+        }
 }
