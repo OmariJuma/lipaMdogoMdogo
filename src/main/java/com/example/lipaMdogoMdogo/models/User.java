@@ -1,5 +1,6 @@
 package com.example.lipaMdogoMdogo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class User {
     private String idNo;
     private String msisdn;
     private Double creditLimit;
+    @JsonIgnore
     @OneToMany(mappedBy = "borrower", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Loan> loans = new ArrayList<>();
     @Enumerated(EnumType.STRING)

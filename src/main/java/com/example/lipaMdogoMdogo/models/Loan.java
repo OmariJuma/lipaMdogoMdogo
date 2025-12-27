@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -19,11 +20,14 @@ public class Loan {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "borrowerId", referencedColumnName = "id")
     private User borrower;
+    @NonNull
     private Double amount;
+    @NonNull
     private String loanPurpose;
     private Double paymentPlan;
     private Boolean isApproved;
     private UUID approverId;
+    private Integer termInMonths;
 //    private ArrayList<Payment> paymentHistory;
     private LocalDateTime issuedAt;
     private LocalDateTime createdAt;
