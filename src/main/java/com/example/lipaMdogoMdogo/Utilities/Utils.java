@@ -4,6 +4,7 @@ import com.example.lipaMdogoMdogo.models.Loan;
 import com.example.lipaMdogoMdogo.models.User;
 import com.example.lipaMdogoMdogo.models.requestDto.LoanReqDto;
 import com.example.lipaMdogoMdogo.models.responseDto.LoanResDto;
+import com.example.lipaMdogoMdogo.models.responseDto.UserResDto;
 
 
 import java.time.LocalDateTime;
@@ -34,6 +35,22 @@ public class Utils {
         loanResDto.setCreatedAt(loan.getCreatedAt());
         loanResDto.setUpdatedAt(loan.getUpdatedAt());
         return loanResDto;
+    }
+
+    public static UserResDto toUserResDto(User user){
+        UserResDto userResDto = new UserResDto();
+        userResDto.setId(user.getId());
+        userResDto.setFirstName(user.getFirstName());
+        userResDto.setSecondName(user.getSecondName());
+        userResDto.setMsisdn(user.getMsisdn());
+        userResDto.setRole(user.getRole());
+        userResDto.setIdNo(user.getIdNo());
+        userResDto.setCreatedAt(user.getCreatedAt());
+        userResDto.setLoans(user.getLoans());
+        userResDto.setUpdatedAt(user.getUpdatedAt());
+        userResDto.setCreditLimit(user.getCreditLimit());
+        return userResDto;
+
     }
 
 }

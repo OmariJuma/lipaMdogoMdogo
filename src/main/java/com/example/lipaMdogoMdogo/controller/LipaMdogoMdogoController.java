@@ -4,12 +4,15 @@ import com.example.lipaMdogoMdogo.Utilities.Utils;
 import com.example.lipaMdogoMdogo.models.Loan;
 import com.example.lipaMdogoMdogo.models.User;
 import com.example.lipaMdogoMdogo.models.requestDto.LoanReqDto;
+import com.example.lipaMdogoMdogo.models.responseDto.LoanResDto;
+import com.example.lipaMdogoMdogo.models.responseDto.UserResDto;
 import com.example.lipaMdogoMdogo.service.LoanService;
 import com.example.lipaMdogoMdogo.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,21 +29,24 @@ public class LipaMdogoMdogoController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User responseBody = userService.createUser(user);
-        return ResponseEntity.status(HttpStatus.OK).body(responseBody) ;
+    public ResponseEntity<UserResDto> createUser(@RequestBody User user){
+        User newUser = userService.createUser(user);
+        UserResDto newUserDto = Utils.toUserResDto(newUser);
+        return ResponseEntity.status(HttpStatus.OK).body(newUserDto) ;
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers(){
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUsers());
+    public ResponseEntity<List<UserResDto>> getAllUsers(){
+        List<UserResDto> userResDtos = userService.getAllUsers().stream().map(Utils::toUserResDto).toList();
+        return ResponseEntity.status(HttpStatus.OK).body(userResDtos);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findUserById(@PathVariable UUID id){
        Optional<User> user = userService.findById(id);
        if(user.isPresent()){
-            return ResponseEntity.status(HttpStatus.OK).body(user);
+           UserResDto userResDto = Utils.toUserResDto(user.get());
+            return ResponseEntity.status(HttpStatus.OK).body(userResDto);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User "+ id +" not found");
     }
@@ -49,7 +55,8 @@ public class LipaMdogoMdogoController {
     public ResponseEntity<?> getAllUserLoans(@PathVariable UUID id){
         List<Loan> allUserLoans = loanService.getUserLoans(id);
         if(!allUserLoans.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.OK).body(allUserLoans);
+            List<LoanResDto> loansDtos = allUserLoans.stream().map(Utils::toLoanDto).toList();
+            return ResponseEntity.status(HttpStatus.OK).body(loansDtos);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No loans have been found for this user  " + id);
     }
@@ -60,7 +67,8 @@ public class LipaMdogoMdogoController {
         if(borrower.isPresent()){
             Loan loanRequest = Utils.toLoanEntity(loanReqDto, borrower.get());
             Loan appliedLoan=  loanService.createLoan(loanRequest);
-            return ResponseEntity.status(HttpStatus.CREATED).body(appliedLoan);
+            LoanResDto appliedLoanDto = Utils.toLoanDto(appliedLoan);
+            return ResponseEntity.status(HttpStatus.CREATED).body(appliedLoanDto);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User "+ id +" not found");
     }
@@ -73,7 +81,8 @@ public class LipaMdogoMdogoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Loan " + id +" not found");
         }
         else if(loanService.isUserLoan(id, loanId)){
-           return ResponseEntity.status(HttpStatus.OK).body(userLoan);
+            LoanResDto userLoanDto = Utils.toLoanDto(userLoan.get());
+           return ResponseEntity.status(HttpStatus.OK).body(userLoanDto);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Loan "+ loanId+ " does not belong to this user "+ id);
 
