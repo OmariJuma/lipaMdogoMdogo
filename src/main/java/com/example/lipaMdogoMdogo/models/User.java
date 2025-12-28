@@ -35,14 +35,4 @@ public class User {
     private Role role;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    // Helper method to link loans back to the user object
-//    public void addLoan(Loan loan) {
-//        if (loan != null) {
-//            if (loans == null) {
-//                loans = new ArrayList<>();
-//            }
-//            loans.add(loan);
-//            loan.setBorrower(this);
-//        }
-//    }
 }

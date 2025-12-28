@@ -1,12 +1,9 @@
 package com.example.lipaMdogoMdogo.models.requestDto;
 
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.Data;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 public class LoanReqDto {
     private UUID id;
     private Double amount;

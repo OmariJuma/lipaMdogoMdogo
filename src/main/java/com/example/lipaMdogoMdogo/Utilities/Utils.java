@@ -46,7 +46,7 @@ public class Utils {
         userResDto.setRole(user.getRole());
         userResDto.setIdNo(user.getIdNo());
         userResDto.setCreatedAt(user.getCreatedAt());
-        userResDto.setLoans(user.getLoans());
+        userResDto.setTotalLoansRequested(user.getLoans().size());
         userResDto.setUpdatedAt(user.getUpdatedAt());
         userResDto.setCreditLimit(user.getCreditLimit());
         return userResDto;

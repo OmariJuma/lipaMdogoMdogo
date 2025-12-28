@@ -18,7 +18,7 @@ public class UserResDto {
     private String idNo;
     private String msisdn;
     private Double creditLimit;
-    private List<Loan> loans = new ArrayList<>();
+    private Integer totalLoansRequested;
     private Role role;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
