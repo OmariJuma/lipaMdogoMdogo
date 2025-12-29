@@ -32,7 +32,7 @@ public class User {
     @OneToMany(mappedBy = "borrower", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Loan> loans = new ArrayList<>();
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private RoleEnum role;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

@@ -1,6 +1,6 @@
 package com.example.lipaMdogoMdogo.service;
 
-import com.example.lipaMdogoMdogo.models.Role;
+import com.example.lipaMdogoMdogo.models.RoleEnum;
 import com.example.lipaMdogoMdogo.models.User;
 import com.example.lipaMdogoMdogo.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class UserService {
             newUser.setSecondName(userInput.getSecondName());
             newUser.setIdNo(userInput.getIdNo());
             newUser.setMsisdn(userInput.getMsisdn());
-            newUser.setRole(userInput.getRole() == null ? Role.USER : userInput.getRole());
+            newUser.setRole(userInput.getRole() == null ? RoleEnum.USER : userInput.getRole());
             newUser.setCreatedAt(LocalDateTime.now());
             newUser.setUpdatedAt(LocalDateTime.now());
 
