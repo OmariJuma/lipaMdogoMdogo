@@ -8,6 +8,8 @@ import com.example.lipaMdogoMdogo.models.responseDto.LoanResDto;
 import com.example.lipaMdogoMdogo.models.responseDto.UserResDto;
 import com.example.lipaMdogoMdogo.service.LoanService;
 import com.example.lipaMdogoMdogo.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,7 @@ import java.util.UUID;
 public class LipaMdogoMdogoController {
     private final UserService userService;
     private final LoanService loanService;
+    private static final Logger logger = LoggerFactory.getLogger(LipaMdogoMdogoController.class);
 
     public LipaMdogoMdogoController(UserService userService, LoanService loanService) {
         this.userService = userService;
@@ -32,12 +35,14 @@ public class LipaMdogoMdogoController {
     public ResponseEntity<UserResDto> createUser(@RequestBody User user){
         User newUser = userService.createUser(user);
         UserResDto newUserDto = Utils.toUserResDto(newUser);
+
         return ResponseEntity.status(HttpStatus.OK).body(newUserDto) ;
     }
 
     @GetMapping
     public ResponseEntity<List<UserResDto>> getAllUsers(){
         List<UserResDto> userResDtos = userService.getAllUsers().stream().map(Utils::toUserResDto).toList();
+        logger.info("Getting all users");
         return ResponseEntity.status(HttpStatus.OK).body(userResDtos);
     }
 
