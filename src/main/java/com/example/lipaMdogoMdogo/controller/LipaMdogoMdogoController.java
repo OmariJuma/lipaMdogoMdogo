@@ -35,7 +35,6 @@ public class LipaMdogoMdogoController {
     public ResponseEntity<UserResDto> createUser(@RequestBody User user){
         User newUser = userService.createUser(user);
         UserResDto newUserDto = Utils.toUserResDto(newUser);
-
         return ResponseEntity.status(HttpStatus.OK).body(newUserDto) ;
     }
 

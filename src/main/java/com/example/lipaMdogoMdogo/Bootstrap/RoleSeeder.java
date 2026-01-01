@@ -25,6 +25,7 @@ public class RoleSeeder implements ApplicationListener<ContextRefreshedEvent> {
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         loadRoles();
+        logger.info("Loading of seed roles is a success!");
     }
     private void loadRoles(){
         RoleEnum[] roleNames = new RoleEnum[] {RoleEnum.ADMIN, RoleEnum.USER, RoleEnum.SUPER_ADMIN, RoleEnum.LOAN_APPROVER};
@@ -41,7 +42,6 @@ public class RoleSeeder implements ApplicationListener<ContextRefreshedEvent> {
                roleToCreate.setName(roleName);
                roleToCreate.setDescription(roleDescription.get(roleName));
                roleRepository.save(roleToCreate);
-               logger.info("Loading of seed roles is a success!");
            });
         });
 
