@@ -14,5 +14,11 @@ services:
     volumes:
       - lipamdogo_postgres_data:/var/lib/postgresql/data
 #    to check it out visit  C:\ProgramData\Docker\volumes\lmm_postgres_data\_data
+
+  adminer:
+    image: ghcr.io/shyim/adminerevo:latest
+    restart: always
+    ports:
+      - 8080:8080
 volumes:
   lipamdogo_postgres_data:

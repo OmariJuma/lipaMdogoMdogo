@@ -3,6 +3,8 @@ package com.example.lipaMdogoMdogo.Bootstrap;
 import com.example.lipaMdogoMdogo.models.Role;
 import com.example.lipaMdogoMdogo.models.RoleEnum;
 import com.example.lipaMdogoMdogo.repository.RoleRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,7 @@ import java.util.Optional;
 @Component
 public class RoleSeeder implements ApplicationListener<ContextRefreshedEvent> {
     private final RoleRepository roleRepository;
+    private static final Logger logger = LoggerFactory.getLogger(RoleSeeder.class);
 
     public RoleSeeder(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
@@ -38,6 +41,7 @@ public class RoleSeeder implements ApplicationListener<ContextRefreshedEvent> {
                roleToCreate.setName(roleName);
                roleToCreate.setDescription(roleDescription.get(roleName));
                roleRepository.save(roleToCreate);
+               logger.info("Loading of seed roles is a success!");
            });
         });
 
